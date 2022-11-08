@@ -24,12 +24,16 @@ function citySubmitHandler (event) {
     let city = cityInput.value.trim();
     if (city) {
         getSearchAPI(city);
-        console.log(city)
-        citySearched.textContent = city + " " + currentDate
+        let cityWithCap = capitalFirstLetter(city)
+        console.log(cityWithCap)
+        console.log(typeof city)
+        citySearched.textContent = cityWithCap + " " + currentDate
     }
 }
 
-
+function capitalFirstLetter (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+}
 
 
 
