@@ -4,16 +4,19 @@ let searchButton = document.getElementById("searchButton")
 let userForm = document.getElementById("userForm");
 let cityInput = document.getElementById("searchInput");
 let citySearched = document.getElementById("citySearched")
+let displayTemp = document.getElementById("displayTemp")
 
 let forecastUrl = "https://api.openweathermap.org/data/2.5/forecast"
+
 let apiKey = "2fc4046d938a7e59ca5625d34a4b85c4"
 
+// Current Date Variable
 let currentDate = moment().format("MMM Do YY");
 
 
-// Function that 
 function createForecastURL (lat, lon) {
-    let url = `${mainUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`
+    let forecastUrl = `${mainUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`
+
 }
 
 function citySubmitHandler (event) {
@@ -22,6 +25,7 @@ function citySubmitHandler (event) {
     if (city) {
         getSearchAPI(city);
         console.log(city)
+        citySearched.textContent = city + " " + currentDate
     }
 }
 
@@ -36,17 +40,12 @@ function getSearchAPI (city) {
         return response.json();
     })
     .then(function(data) {
-        displayCurrentCity(data.items)
+        console.log(data)
+        
+        
     });
 }
 
-function displayCurrentCity (cities, cityText) {
-    citySearched.textContent = cityText
-    for (let i = 0; i < cities.length; i++) {
-        let cityAndDate = cities[i].name + " " + currentDate;
-        let 
-    }
-}
 
 searchButton.addEventListener("click", getSearchAPI);
 userForm.addEventListener("submit", citySubmitHandler)
