@@ -14,34 +14,34 @@
         <link rel="stylesheet" href="style.css" />
         <title>Weather Dashboard</title>
     </head>
-    <body class="container">
-        <div class="container">
+    <body background="weather2.jpg" class="container ">
+        <div class="container text-center">
             <p class="display-2">WEATHER DASHBOARD</p>
         </div>
         <div class="row">
-        <div class="col-3 col-md-3">
-            <form id="userForm"class="row">
+        <div class="col-3 col-md-3 mx-4">
+            <form id="userForm"class="row d-flex justify-content-center">
                 <div class="col-auto">
-                    <label for="searchInput">Search your city here:</label>
+                    <label class="d-flex justify-content-center" for="searchInput">Search your city here:</label>
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control mt-3"
                         id="searchInput"
                         placeholder="Search"
                     />
                 </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3" id="searchButton">
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary mb-3 mt-3 " id="searchButton">
                         Search
                     </button>
                 </div>
             </form>
             <hr />
-            <ul id="searchList">ghdg</ul>
+            <ul id="searchList">ghdgsdfdfsdfsdfsdfsdfsadfasdfvsdv</ul>
         </div>
-        <div class="col bg-secondary">
+        <div id="weatherBox" class="col bg-secondary p-3">
             <div id="currentWeather" class="row">
-                <h3 class="subtitle">Weather for: <span id="citySearched"></span></h3>
+                <h3 class="subtitle text-center"><span id="citySearched"></span></h3>
                 <p id="displayTemp"></p>
             </div>
             <hr>
