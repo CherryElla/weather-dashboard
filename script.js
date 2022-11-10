@@ -1,5 +1,9 @@
 let cityContainer = document.getElementById("currentweather");
-let forecastContainer = document.getElementById("forecast");
+let todayContainer = document.getElementById("today");
+let todayContainer1 = document.getElementById("today1");
+let todayContainer2 = document.getElementById("today2");
+let forecastBox = document.getElementById("forecastBox")
+let forecastList = document.getElementById("forecastList")
 let searchButton = document.getElementById("searchButton");
 let userForm = document.getElementById("userForm");
 let cityInput = document.getElementById("searchInput");
@@ -25,19 +29,32 @@ async function responseToJson(response) {
 
 // A function that capitilises the first letter of a string
 function capitalFirstLetter(string) {
-    
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function displayForecast (temp, humidity, wind) {
+    forecastBox.textContent = temp 
 }
 
 async function getForecast(lat, lon) {
     let requestUrl = `${forecastUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`;
     let response = await fetch(requestUrl);
     let data = await responseToJson(response);
-    // do something with the forecast6
     console.log(data)
-    
+    // Forecast data object
+    let forecastData = data.list[0]
+    console.log(forecastData)
+    let temp = forecastData.main.temp
+    let humidity = forecastData.main.humidity
+    let wind = forecastData.wind.speed
+    console.log(temp)
+    forecastList.textContent = "Temperature: " + temp + " Humidity: " + humidity + " Wind Speed: " + wind
+
 }
 
+// Main function that takes city inputted and calls getSearchAPIAsync function 
+// returning the city object with data 
+// Also prints the city serached and date to the page
 async function citySubmitHandlerAsync(event) {
     event.preventDefault();
     let city = cityInput.value.trim();
@@ -49,7 +66,9 @@ async function citySubmitHandlerAsync(event) {
         console.log(latitute);
         let longitude = cityObject.lon;
         console.log(longitude);
-        getForecast(latitute, longitude)
+        // Calls the function getForecast, passing in lat and lon values
+        // and returns the fetched data object
+        getForecast(latitute, longitude);
         let cityWithCap = capitalFirstLetter(city);
         console.log(cityWithCap);
         console.log(typeof city);
