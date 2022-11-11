@@ -1,7 +1,21 @@
+#forecastRow {
+    border-radius: 20px;
+}
+
 #weatherBox {
     border-radius: 20px;
 }
 
-#forecastBox {
+#forecastBox0, 
+#forecastBox1,
+#forecastBox2,
+#forecastBox3,
+#forecastBox4 {
     border-radius: 20px;
+    margin-left: 10px;
 }
+
+#forecastBox0 {
+    margin-left: 50px;
+}
+

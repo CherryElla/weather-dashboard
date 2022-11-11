@@ -14,46 +14,71 @@
         <link rel="stylesheet" href="style.css" />
         <title>Weather Dashboard</title>
     </head>
-    <body background="weather2.jpg" class="container ">
+    <body background="weather2.jpg" class="container">
         <div class="container text-center">
             <p class="display-2">WEATHER DASHBOARD</p>
         </div>
         <div class="row">
-        <div class="col-3 col-md-3 mx-4">
-            <form id="userForm"class="row d-flex justify-content-center">
-                <div class="col-auto">
-                    <label class="d-flex justify-content-center" for="searchInput">Search your city here:</label>
-                    <input
-                        type="text"
-                        class="form-control mt-3"
-                        id="searchInput"
-                        placeholder="Search"
-                    />
-                </div>
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary mb-3 mt-3 " id="searchButton">
-                        Search
-                    </button>
-                </div>
-            </form>
-            <hr />
-            <ul id="searchList">ghdgsdfdfsdfsdfsdfsdfsadfasdfvsdv</ul>
-        </div>
-        <div id="weatherBox" class="col bg-secondary p-3">
-            <div id="currentWeather" class="row">
-                <h3 class="subtitle text-center"><span id="citySearched"></span></h3>
-                <p id="displayTemp"></p>
+            <div class="col-3 col-md-3 mx-4">
+                <form id="userForm" class="row d-flex justify-content-center">
+                    <div class="col-auto">
+                        <label
+                            class="d-flex justify-content-center"
+                            for="searchInput"
+                            ></label
+                        >
+                        <input
+                            type="text"
+                            class="form-control mt-3 text-center"
+                            id="searchInput"
+                            placeholder="Search A City Here"
+                        />
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button
+                            type="submit"
+                            class="btn btn-primary mb-3 mt-3"
+                            id="searchButton"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </form>
+                <hr />
+                <ul id="searchList">
+                    ghdgsdfdfsdfsdfsdfsdfsadfasdfvsdv
+                </ul>
             </div>
-            <hr>
-            <div id="today" class="row">sfsd</div>
-            <div id="today1" class="row">sfsd</div>
-            <div id="today2" class="row">sfsd</div>
+            <div id="weatherBox" class="col bg-secondary p-3">
+                <div id="currentWeather" class="row">
+                    <h3 class="subtitle text-center">
+                        <span id="citySearched"></span>
+                    </h3>
+                    <p id="displayTemp"></p>
+                </div>
+                <hr />
+                <div id="today" class="row">sfsd</div>
+            </div>
+            <div class="container pt-4">
+                <div  class="row offset-md-3">
+                    <div id="forecastBox0" class="bg-primary col-sm">
+                        <h3 class="text-center">5 DAY FORECAST</h3>
+                    </div>
+                    <div id="forecastBox1" class="bg-primary col-sm">
+                        <h3 class="text-center">5 DAY FORECAST</h3>
+                    </div>
+                    <div id="forecastBox2" class="bg-primary col-sm">
+                        <h3 class="text-center">5 DAY FORECAST</h3>
+                    </div>
+                    <div id="forecastBox3" class="bg-primary col-sm">
+                        <h3 class="text-center">5 DAY FORECAST</h3>
+                    </div>
+                    <div id="forecastBox4" class="bg-primary col-sm">
+                        <h3 class="text-center">5 DAY FORECAST</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="forecastBox" class="bg-primary flex-row-reverse"><h3 class="text-center">5 DAY FORECAST</h3>
-            <ul class="p-0" id="forecastList">TEMPERATURE:</ul>
-        </div>
-        
-    </div>
     </body>
     <!-- JavaScript Bundle with Popper -->
     <script
@@ -62,8 +87,8 @@
         crossorigin="anonymous"
     ></script>
     <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
-></script>
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    ></script>
     <script src="script.js"></script>
 </html>
