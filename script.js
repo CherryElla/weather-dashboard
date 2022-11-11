@@ -5,7 +5,14 @@ let forecastBox1 = document.getElementById("forecastBox1");
 let forecastBox2 = document.getElementById("forecastBox2");
 let forecastBox3 = document.getElementById("forecastBox3");
 let forecastBox4 = document.getElementById("forecastBox4");
-let forecastBoxes = [forecastBox0, forecastBox1, forecastBox2, forecastBox3, forecastBox4]
+let forecastBoxes = [
+    forecastBox0,
+    forecastBox1,
+    forecastBox2,
+    forecastBox3,
+    forecastBox4,
+];
+console.log(forecastBoxes);
 // let forecastList = document.getElementById("forecastList");
 let searchButton = document.getElementById("searchButton");
 let userForm = document.getElementById("userForm");
@@ -35,23 +42,20 @@ function capitalFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function forecastBoxIndex () {
-    for (let i = 0; i < forecastBoxes.length; i++) {
-        let boxIndexes = forecastBoxes[i]
-    }
-    console.log(boxIndexes)
-    return boxIndexes
-}
 
 function displayForecast(weatherArray) {
-    // let  =
-    for (let i = 0; i < weatherArray.length; i ++) {
+
+    for (let i = 0; i < weatherArray.length; i++) {
         let temp = weatherArray[i].main.temp;
         let humidity = weatherArray[i].main.humidity;
         let wind = weatherArray[i].wind.speed;
-        console.log(temp)
+        console.log(temp);
+        for (let i = 0; i < forecastBoxes.length; i++) {
+            let forecastBox = forecastBoxes[i]
+            forecastBox.textContent = "Temperature: " + temp + " Humidity: " + humidity + " Wind: " + wind
         }
-        // let forecastBoxIndex = forecastBoxIndex()
+    }
+
 
     // forecastBox.textContent =
     //     "Temperature " + temp + " Humidity " + humidity + " Wind " + wind;
@@ -85,7 +89,7 @@ async function getForecast(lat, lon) {
         today: todatWeatherData,
         forecast: forecastData,
     };
-    console.log(result)
+    console.log(result);
     return result;
 }
 
