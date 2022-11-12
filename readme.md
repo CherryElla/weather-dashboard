@@ -12,3 +12,5 @@
 - [ ] THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 - [ ] WHEN I click on a city in the search history
 - [ ] THEN I am again presented with current and future conditions for that city
+
+<img width="1350" alt="Screenshot 2022-11-11 at 12 01 33 AM" src="https://user-images.githubusercontent.com/111384784/201267032-a09a3481-d5fe-48b5-bf3c-27a9eb708180.png">
