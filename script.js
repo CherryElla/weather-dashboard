@@ -12,7 +12,6 @@ let forecastBoxes = [
     forecastBox3,
     forecastBox4,
 ];
-console.log(forecastBoxes);
 // let forecastList = document.getElementById("forecastList");
 let searchButton = document.getElementById("searchButton");
 let userForm = document.getElementById("userForm");
@@ -42,23 +41,24 @@ function capitalFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-
-function displayForecast(weatherArray) {
-
-    for (let i = 0; i < weatherArray.length; i++) {
+function displayForecast(forecastObj) {
+    let weatherArray = forecastObj.list;
+    for (let i = 0; i < forecastBoxes.length; i++) {
         let temp = weatherArray[i].main.temp;
         let humidity = weatherArray[i].main.humidity;
         let wind = weatherArray[i].wind.speed;
         console.log(temp);
-        for (let i = 0; i < forecastBoxes.length; i++) {
-            let forecastBox = forecastBoxes[i]
-            forecastBox.textContent = "Temperature: " + temp + " Humidity: " + humidity + " Wind: " + wind
-        }
+        console.log(i);
+        let forecastBox = forecastBoxes[i];
+        forecastBox.textContent =
+            "Temperature: " +
+            temp +
+            " Humidity: " +
+            humidity +
+            " Wind: " +
+            wind;
+        console.log(i);
     }
-
-
-    // forecastBox.textContent =
-    //     "Temperature " + temp + " Humidity " + humidity + " Wind " + wind;
 }
 
 // Function that displays today's weather
@@ -70,23 +70,27 @@ function dissplayTodayWeather(weatherObj) {
         "Temperature " + temp + " Humidity " + humidity + " Wind " + wind;
 }
 
-async function getForecast(lat, lon) {
-    let requestUrl = `${forecastUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+async function getMyWeather(urlEndpoint, lat, lon, units = "imperial") {
+    let requestUrl = `${urlEndpoint}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
     let response = await fetch(requestUrl);
     let data = await responseToJson(response);
     console.log(data);
-    // Forecast data object
-    let todatWeatherData = data.list[0];
-    console.log(todatWeatherData);
-    // Forecast 5 day data objects
-    let forecastData = [];
-    for (let i = 1; i < 6; i++) {
-        forecastData.push(data.list[i]);
-    }
-    console.log(forecastData);
+    return data;
+}
 
+// async function getForecast(lat, lon, units = "imperial") {
+//     return await getMyWeather(forecastUrl, lat, lon, units);
+// }
+
+// async function getCurrentWeather(lat, lon, units = "imperial") {
+//     return await getMyWeather(weatherUrl, lat, lon, units);
+// }
+
+async function getAllWeather(lat, lon, units = "imperial") {
+    let todayWeatherData = await getMyWeather(weatherUrl, lat, lon, units);
+    let forecastData = await getMyWeather(forecastUrl, lat, lon, units);
     let result = {
-        today: todatWeatherData,
+        today: todayWeatherData,
         forecast: forecastData,
     };
     console.log(result);
@@ -109,7 +113,7 @@ async function citySubmitHandlerAsync(event) {
         console.log(longitude);
         // Calls the function getForecast, passing in lat and lon values
         // and returns the fetched data object
-        let forecastAndTodayObject = await getForecast(latitute, longitude);
+        let forecastAndTodayObject = await getAllWeather(latitute, longitude);
         dissplayTodayWeather(forecastAndTodayObject.today);
         displayForecast(forecastAndTodayObject.forecast);
         let cityWithCap = capitalFirstLetter(city);
