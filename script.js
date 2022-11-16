@@ -12,7 +12,6 @@ let forecastBoxes = [
     forecastBox3,
     forecastBox4,
 ];
-// let forecastList = document.getElementById("forecastList");
 let searchButton = document.getElementById("searchButton");
 let userForm = document.getElementById("userForm");
 let cityInput = document.getElementById("searchInput");
@@ -24,9 +23,10 @@ let forecastUrl = `${baseUrl}data/2.5/forecast`;
 let lookupUrl = `${baseUrl}geo/1.0/direct`;
 let weatherUrl = `${baseUrl}data/2.5/weather`;
 
+// API key from openweathermap API
 let apiKey = "2fc4046d938a7e59ca5625d34a4b85c4";
 
-// Current Date Variable
+// Current Date from moment.js
 let currentDate = moment().format("MMM Do YY");
 
 // Function that takes the response and converts to json
@@ -42,6 +42,7 @@ function capitalFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+// A html div box builder function for forecast boxes
 function forecastBoxBuilder (temp, humidity, wind, forecastBox, icon) {
     let tempBox = `<div><h3>Temperature: ${temp}℉</h3></div>`
     let humidityBox = `<div><h3>Humidity: ${humidity}%</h3></div>`
@@ -53,7 +54,7 @@ function forecastBoxBuilder (temp, humidity, wind, forecastBox, icon) {
 
 }
 
-
+// A display the 5 day forecast function
 function displayForecast(forecastObj) {
     let weatherArray = forecastObj.list;
     for (let i = 0; i < forecastBoxes.length; i++) {
@@ -71,7 +72,7 @@ function displayForecast(forecastObj) {
     }
 }
 
-// Function that displays today's weather
+// A function that displays today's weather
 function dissplayTodayWeather(weatherObj) {
     let temp = weatherObj.main.temp;
     let humidity = weatherObj.main.humidity;
@@ -86,6 +87,7 @@ function dissplayTodayWeather(weatherObj) {
     $("#today").append(icon);
 }
 
+// A function that fetches a weather API URL
 async function getMyWeather(urlEndpoint, lat, lon, units = "imperial") {
     let requestUrl = `${urlEndpoint}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
     let response = await fetch(requestUrl);
@@ -95,7 +97,7 @@ async function getMyWeather(urlEndpoint, lat, lon, units = "imperial") {
 }
 
 
-
+//  A function that gets today's and the forecasts weather and stores the data
 async function getAllWeather(lat, lon, units = "imperial") {
     let todayWeatherData = await getMyWeather(weatherUrl, lat, lon, units);
     let forecastData = await getMyWeather(forecastUrl, lat, lon, units);
@@ -107,9 +109,7 @@ async function getAllWeather(lat, lon, units = "imperial") {
     return result;
 }
 
-// Main function that takes city inputted and calls getSearchAPIAsync function
-// returning the city object with data
-// Also prints the city serached and date to the page
+// Main function
 async function citySubmitHandlerAsync(event) {
     event.preventDefault();
     let city = cityInput.value.trim();
@@ -133,8 +133,7 @@ async function citySubmitHandlerAsync(event) {
     }
 }
 
-// Function that requests/fetches data with the given city URL and returns city object
-// Also converts the data into json
+// Function that requests/fetches data with the given city and returns city object
 async function getSearchAPIAsync(city) {
     let requestUrl = `${lookupUrl}?q=${city}&limit=1&appid=${apiKey}`;
     let response = await fetch(requestUrl);
