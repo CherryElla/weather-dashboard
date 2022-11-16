@@ -18,6 +18,7 @@ let userForm = document.getElementById("userForm");
 let cityInput = document.getElementById("searchInput");
 let citySearched = document.getElementById("citySearched");
 let displayTemp = document.getElementById("displayTemp");
+let forecastContainer = document.getElementById("forecastContainer")
 let baseUrl = "https://api.openweathermap.org/";
 let forecastUrl = `${baseUrl}data/2.5/forecast`;
 let lookupUrl = `${baseUrl}geo/1.0/direct`;
@@ -41,6 +42,18 @@ function capitalFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function forecastBoxBuilder (temp, humidity, wind, forecastBox, icon) {
+    let tempBox = `<div><h3>Temperature: ${temp}℉</h3></div>`
+    let humidityBox = `<div><h3>Humidity: ${humidity}%</h3></div>`
+    let windBox = `<div><h3>Wind: ${wind}mph</h3></div>`
+    $(forecastBox).append(tempBox)
+    $(forecastBox).append(humidityBox)
+    $(forecastBox).append(windBox)
+    $(forecastBox).append(icon)
+
+}
+
+
 function displayForecast(forecastObj) {
     let weatherArray = forecastObj.list;
     for (let i = 0; i < forecastBoxes.length; i++) {
@@ -48,20 +61,13 @@ function displayForecast(forecastObj) {
         let humidity = weatherArray[i].main.humidity;
         let wind = weatherArray[i].wind.speed;
         let iconID = weatherArray[i].weather[0].icon;
-        let icon = `<img style="width:50px; height: auto;" 
+        let icon = `<div style="text-align:center;"><img style="text-align:center; width:60px; height:auto;" 
         class="weatherIcon" src="http://openweathermap.org/img/w/${iconID}.png" 
-        alt="Weather icon"/>`;
+        alt="Weather icon"/></div>`;
         console.log(iconID)
         let forecastBox = forecastBoxes[i];
-        forecastBox.textContent =
-            "Temperature: " +
-            temp +
-            " Humidity: " +
-            humidity +
-            " Wind: " +
-            wind;
-        console.log(i);
-        $(forecastBox).append(icon);
+        forecastBoxBuilder(temp, humidity, wind, forecastBox, icon)
+        forecastContainer.style.visibility = "visible"
     }
 }
 
@@ -71,12 +77,12 @@ function dissplayTodayWeather(weatherObj) {
     let humidity = weatherObj.main.humidity;
     let wind = weatherObj.wind.speed;
     let iconID = weatherObj.weather[0].icon;
-    let icon = `<img style="width:70px; height: auto;" 
+    let icon = `<img style="padding-left: 10px; width:70px; height: auto;" 
     class="weatherIcon" src="http://openweathermap.org/img/w/${iconID}.png" 
     alt="Weather icon"/>`;
     console.log(iconID);
     todayContainer.textContent =
-        "Temperature: " + temp + " Humidity: " + humidity + " Wind: " + wind + " ";
+        "Temperature: " + temp + "℉" + " Humidity: " + humidity + "%" + " Wind: " + wind + "mph";
     $("#today").append(icon);
 }
 
