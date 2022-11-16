@@ -47,8 +47,11 @@ function displayForecast(forecastObj) {
         let temp = weatherArray[i].main.temp;
         let humidity = weatherArray[i].main.humidity;
         let wind = weatherArray[i].wind.speed;
-        console.log(temp);
-        console.log(i);
+        let iconID = weatherArray[i].weather[0].icon;
+        let icon = `<img style="width:50px; height: auto;" 
+        class="weatherIcon" src="http://openweathermap.org/img/w/${iconID}.png" 
+        alt="Weather icon"/>`;
+        console.log(iconID)
         let forecastBox = forecastBoxes[i];
         forecastBox.textContent =
             "Temperature: " +
@@ -58,6 +61,7 @@ function displayForecast(forecastObj) {
             " Wind: " +
             wind;
         console.log(i);
+        $(forecastBox).append(icon);
     }
 }
 
@@ -66,8 +70,14 @@ function dissplayTodayWeather(weatherObj) {
     let temp = weatherObj.main.temp;
     let humidity = weatherObj.main.humidity;
     let wind = weatherObj.wind.speed;
+    let iconID = weatherObj.weather[0].icon;
+    let icon = `<img style="width:70px; height: auto;" 
+    class="weatherIcon" src="http://openweathermap.org/img/w/${iconID}.png" 
+    alt="Weather icon"/>`;
+    console.log(iconID);
     todayContainer.textContent =
-        "Temperature " + temp + " Humidity " + humidity + " Wind " + wind;
+        "Temperature: " + temp + " Humidity: " + humidity + " Wind: " + wind + " ";
+    $("#today").append(icon);
 }
 
 async function getMyWeather(urlEndpoint, lat, lon, units = "imperial") {
@@ -78,13 +88,7 @@ async function getMyWeather(urlEndpoint, lat, lon, units = "imperial") {
     return data;
 }
 
-// async function getForecast(lat, lon, units = "imperial") {
-//     return await getMyWeather(forecastUrl, lat, lon, units);
-// }
 
-// async function getCurrentWeather(lat, lon, units = "imperial") {
-//     return await getMyWeather(weatherUrl, lat, lon, units);
-// }
 
 async function getAllWeather(lat, lon, units = "imperial") {
     let todayWeatherData = await getMyWeather(weatherUrl, lat, lon, units);
