@@ -47,6 +47,7 @@ function forecastBoxBuilder (temp, humidity, wind, forecastBox, icon) {
     let tempBox = `<div><h3>Temperature: ${temp}℉</h3></div>`
     let humidityBox = `<div><h3>Humidity: ${humidity}%</h3></div>`
     let windBox = `<div><h3>Wind: ${wind}mph</h3></div>`
+    $(forecastBox).html("")
     $(forecastBox).append(tempBox)
     $(forecastBox).append(humidityBox)
     $(forecastBox).append(windBox)
