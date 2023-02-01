@@ -12,6 +12,15 @@ h3 {
     font-family: cloud;
     color: aliceblue;
     font-size: 100px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.searchContainer {
+    border: solid;
+    border-color: gray;
+    border-radius: 20px;
+    padding: 20px;
 }
 
 #forecastRow {

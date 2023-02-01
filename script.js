@@ -23,6 +23,10 @@ let forecastUrl = `${baseUrl}data/2.5/forecast`;
 let lookupUrl = `${baseUrl}geo/1.0/direct`;
 let weatherUrl = `${baseUrl}data/2.5/weather`;
 
+
+// Global for cities searched list
+let cityList = document.getElementById("cityList")
+
 // API key from openweathermap API
 let apiKey = "2fc4046d938a7e59ca5625d34a4b85c4";
 
@@ -114,6 +118,7 @@ async function getAllWeather(lat, lon, units = "imperial") {
 async function citySubmitHandlerAsync(event) {
     event.preventDefault();
     let city = cityInput.value.trim();
+
     if (city) {
         let cityObject = await getSearchAPIAsync(city);
         console.log("in submit");
@@ -129,8 +134,10 @@ async function citySubmitHandlerAsync(event) {
         displayForecast(forecastAndTodayObject.forecast);
         let cityWithCap = capitalFirstLetter(city);
         console.log(cityWithCap);
-        console.log(typeof city);
         citySearched.textContent = cityWithCap + ":" + " " + currentDate;
+        let myCity = myCities(cityWithCap);
+        console.log(myCity)
+
     }
 }
 
@@ -143,5 +150,51 @@ async function getSearchAPIAsync(city) {
     return data[0];
 }
 
+// Function that displays my searched cities
+// async function displayMyCity (city) {
+//     if (clicks < 7) {
+//         let cityButton = document.createElement("button");
+//         cityButton.innerText = city
+//         cityList.appendChild(cityButton);
+        
+//     } else {
+//         removeAllChildren(cityList);
+//         let cityButton = document.createElement("button");
+//         cityButton.innerText = city
+//         cityList.appendChild(cityButton);
+
+//     }
+// }
+
+// A function to remove all children
+function removeAllChildren (parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+// A function to count button clicks 
+let clicks = 0
+function clickCount () {
+clicks = clicks + 1;
+}
+
+// A function that stores cities searched in an array
+cityArray = []
+
+async function myCities (city) {
+    cityArray.push(city)
+    console.log(cityArray)
+    cityArray.slice(0,6)
+}
+
+// A function that resets the city array
+ 
+
+
+
+
+
 // Global Event Listeners
-userForm.addEventListener("submit", citySubmitHandlerAsync);
+let cityEntered = userForm.addEventListener("submit", citySubmitHandlerAsync, myCities);
+
